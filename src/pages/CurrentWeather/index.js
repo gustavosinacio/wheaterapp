@@ -1,14 +1,17 @@
 import React, { useState, useCallback } from 'react';
 import { ScrollView, RefreshControl } from 'react-native';
 import { useEffect } from 'react';
-import { addDays, addHours, format } from 'date-fns';
+import { format } from 'date-fns';
 import { pt } from 'date-fns/locale';
 import Geolocation from '@react-native-community/geolocation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import api from '../../services/api';
-import MySafeAreaView from '../../components/MySafeAreaView';
 import theme from '../../assets/theme';
+import HourItem from './HourItem';
+import DayItem from './DayItem';
+import MySafeAreaView from '../../components/MySafeAreaView';
+import ForecastFlatList from '../../components/ForecastFlatList';
 import {
   Container,
   PaddedContainer,
@@ -19,16 +22,10 @@ import {
   Divider,
   TemperatureLabel,
   FlatListTitle,
-  Flatlist,
-  ForecastItem,
-  RowContainer,
-  ForecastIcon,
   DateText,
   LargeText,
   MediumText,
   SmallText,
-  MaxTempForecast,
-  MinTempForecast,
 } from './styles';
 
 const CurrentWeather = () => {
@@ -85,19 +82,6 @@ const CurrentWeather = () => {
   useEffect(() => {
     requestWeatherData();
   }, [requestWeatherData]);
-
-  useEffect(() => {
-    console.log(2231, locationTimestamp);
-  }, [locationTimestamp]);
-  useEffect(() => {
-    console.log(2232, locationInfo);
-  }, [locationInfo]);
-  useEffect(() => {
-    console.log(2233, weatherInfo);
-  }, [weatherInfo]);
-  useEffect(() => {
-    console.log(2234, forecastInfo);
-  }, [forecastInfo]);
 
   return (
     <MySafeAreaView>
@@ -156,42 +140,10 @@ const CurrentWeather = () => {
               <PaddedContainer>
                 <FlatListTitle>Hora em hora:</FlatListTitle>
               </PaddedContainer>
-              <Flatlist
-                horizontal
-                showsHorizontalScrollIndicator={false}
+              <ForecastFlatList
                 data={forecastInfo.hourly}
-                keyExtractor={(hour) => `${hour.dt}`}
                 renderItem={({ item: hour, index }) => {
-                  const formatedDate = format(
-                    addHours(new Date(), index),
-                    "HH':00'",
-                    {
-                      locale: pt,
-                    },
-                  );
-
-                  const description = `${hour.weather[0].description
-                    .substring(0, 1)
-                    .toUpperCase()}${hour.weather[0].description.substring(1)}`;
-
-                  return (
-                    index > 0 && (
-                      <ForecastItem>
-                        <MediumText>{formatedDate}</MediumText>
-                        <RowContainer>
-                          <ForecastIcon
-                            source={{
-                              uri:
-                                weatherInfo.weather[0] &&
-                                `https://openweathermap.org/img/wn/${hour.weather[0].icon}@4x.png`,
-                            }}
-                          />
-                        </RowContainer>
-                        <MediumText>{Math.round(hour.temp)}&deg;C</MediumText>
-                        <SmallText>{description}</SmallText>
-                      </ForecastItem>
-                    )
-                  );
+                  return <HourItem hour={hour} index={index} />;
                 }}
               />
 
@@ -199,52 +151,10 @@ const CurrentWeather = () => {
               <PaddedContainer>
                 <FlatListTitle>Próximos dias:</FlatListTitle>
               </PaddedContainer>
-              <Flatlist
-                horizontal
-                showsHorizontalScrollIndicator={false}
+              <ForecastFlatList
                 data={forecastInfo.daily}
-                keyExtractor={(day) => `${day.dt}`}
                 renderItem={({ item: day, index }) => {
-                  const date = addDays(new Date(), index);
-                  const weekDay = `${format(date, 'EEEEE', {
-                    locale: pt,
-                  }).toUpperCase()}${format(date, 'EEE', {
-                    locale: pt,
-                  }).substring(1)}`;
-                  const description = `${day.weather[0].description
-                    .substring(0, 1)
-                    .toUpperCase()}${day.weather[0].description.substring(1)}`;
-
-                  return (
-                    index > 0 && (
-                      <ForecastItem>
-                        <LargeText>{weekDay}</LargeText>
-                        <RowContainer>
-                          <ForecastIcon
-                            source={{
-                              uri:
-                                weatherInfo.weather[0] &&
-                                `https://openweathermap.org/img/wn/${day.weather[0].icon}@4x.png`,
-                            }}
-                          />
-                          <MaxTempForecast>
-                            {Math.round(day.temp.max)}&deg;
-                          </MaxTempForecast>
-                          <MinTempForecast>
-                            {Math.round(day.temp.min)}&deg;
-                          </MinTempForecast>
-                        </RowContainer>
-
-                        <SmallText>{description}</SmallText>
-                        <SmallText>Umidade: {day.humidity}%</SmallText>
-                        <SmallText>Ventos: {day.wind_speed} km/h</SmallText>
-                        <SmallText>
-                          Direção dos ventos: {day.wind_deg}&deg;
-                        </SmallText>
-                        <SmallText>UV: {day.uvi}</SmallText>
-                      </ForecastItem>
-                    )
-                  );
+                  return <DayItem day={day} index={index} />;
                 }}
               />
             </>

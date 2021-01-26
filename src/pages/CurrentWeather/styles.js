@@ -57,9 +57,6 @@ export const FlatListTitle = styled.Text`
   font-size: 22px;
   color: ${theme.textColor};
 `;
-export const Flatlist = styled.FlatList`
-  margin-top: 10px;
-`;
 
 export const ForecastItem = styled.View`
   border-radius: 10px;
