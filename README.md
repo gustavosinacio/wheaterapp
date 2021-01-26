@@ -9,6 +9,13 @@ Desenvolvido com android API 29. Não foi testado no iOS
 [Tela inicial 02](evidence02.jpg "Tela inicial 02")
 [Tela detalhes previsão](evidence03.jpg "Tela inicial 02")
 
+
+<div>
+  <img width="200"  src="evidence01.jpg">
+  <img width="200"  src="evidence03.jpg">
+  <img width="200"  src="evidence03.jpg">
+</div>
+
 ## Para rodar a aplicação
 
 1. Clone o repositório
