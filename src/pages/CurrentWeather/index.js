@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import api from '../../services/api';
 import theme from '../../assets/theme';
+import MinuteItem from './MinuteItem';
 import HourItem from './HourItem';
 import DayItem from './DayItem';
 import MySafeAreaView from '../../components/MySafeAreaView';
@@ -84,6 +85,10 @@ const CurrentWeather = () => {
     requestWeatherData();
   }, [requestWeatherData]);
 
+  useEffect(() => {
+    console.log(2234, forecastInfo);
+  }, [forecastInfo]);
+
   return (
     <MySafeAreaView>
       <ScrollView
@@ -157,7 +162,18 @@ const CurrentWeather = () => {
 
               <Divider />
               <PaddedContainer>
-                <FlatListTitle>Hora em hora:</FlatListTitle>
+                <FlatListTitle>Precipitação (60 min):</FlatListTitle>
+              </PaddedContainer>
+              <ForecastFlatList
+                data={forecastInfo.minutely}
+                renderItem={({ item: minute, index }) => {
+                  return <MinuteItem minute={minute} index={index} />;
+                }}
+              />
+
+              <Divider />
+              <PaddedContainer>
+                <FlatListTitle>Previsão (48h):</FlatListTitle>
               </PaddedContainer>
               <ForecastFlatList
                 data={forecastInfo.hourly}
@@ -168,7 +184,7 @@ const CurrentWeather = () => {
 
               <Divider />
               <PaddedContainer>
-                <FlatListTitle>Próximos dias:</FlatListTitle>
+                <FlatListTitle>Previsão (7 dias):</FlatListTitle>
               </PaddedContainer>
               <ForecastFlatList
                 data={forecastInfo.daily}
