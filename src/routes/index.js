@@ -1,31 +1,45 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, ScrollView, View } from 'react-native';
+// import { SafeAreaView, StyleSheet, ScrollView, View } from 'react-native';
 
-import { LearnMoreLinks, Colors } from 'react-native/Libraries/NewAppScreen';
+// import { LearnMoreLinks, Colors } from 'react-native/Libraries/NewAppScreen';
+import { createStackNavigator } from '@react-navigation/stack';
+import CurrentWeather from '../pages/CurrentWeather';
 
-const Routes = () => {
+//TODO REMOVE
+// const LearMoreLinks = () => {
+//   return (
+//     <>
+//       <SafeAreaView>
+//         <ScrollView
+//           contentInsetAdjustmentBehavior="automatic"
+//           style={styles.scrollView}>
+//           <View style={styles.body}>
+//             <LearnMoreLinks />
+//           </View>
+//         </ScrollView>
+//       </SafeAreaView>
+//     </>
+//   );
+// };
+
+const WeatherInfoStackNavigator = createStackNavigator();
+
+const WeatherStack = () => {
   return (
-    <>
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <View style={styles.body}>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+    <WeatherInfoStackNavigator.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <WeatherInfoStackNavigator.Screen
+        name="CurrentWeather"
+        component={CurrentWeather}
+      />
+    </WeatherInfoStackNavigator.Navigator>
   );
 };
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-});
+const Routes = () => {
+  return <WeatherStack />;
+};
 
 export default Routes;
