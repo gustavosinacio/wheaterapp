@@ -108,7 +108,6 @@ const CurrentWeather = () => {
           <RefreshControl
             refreshing={loadingWeather}
             onRefresh={requestWeatherData}
-            tintColor={theme.iconColor}
           />
         }>
         <Container>
