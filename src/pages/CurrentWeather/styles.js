@@ -1,37 +1,48 @@
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 import theme from '../../assets/theme';
 
 export const Container = styled.ScrollView`
   flex: 1;
   background-color: ${theme.mainColor};
-  padding: 25px;
-  /* margin-top: auto; */
-  /* border-top-right-radius: 35px; */
-  /* border-top-left-radius: 35px; */
+  margin-top: 25px;
 `;
 
-export const DateLabel = styled.Text`
-  color: ${theme.accentTextColor};
-  font-size: 24px;
-  /* align-self: center; */
+export const ActivityIndicator = styled.ActivityIndicator`
+  align-self: center;
 `;
 
-export const InfoLabel = styled.Text`
-  color: ${theme.accentTextColor};
-  font-size: 18px;
+export const PaddedContainer = styled.View`
+  padding-left: 25px;
+  padding-right: 0px;
+`;
+
+export const TitleContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 25px;
+`;
+
+export const UpdatedAtTouchable = styled(TouchableOpacity)`
+  align-items: center;
+  justify-content: center;
+  background-color: #0003;
+  padding: 10px;
+  border-radius: 10px;
 `;
 
 export const TempIconContainer = styled.View`
   flex-direction: row;
+  align-items: center;
 `;
 
 export const Image = styled.Image`
-  height: 110px;
-  width: 110px;
+  height: 150px;
+  width: 150px;
 `;
 
 export const TemperatureLabel = styled.Text`
-  color: ${theme.accentTextColor};
+  color: ${theme.textColor};
   font-size: 90px;
 `;
 
@@ -44,7 +55,7 @@ export const Divider = styled.View`
 export const FlatListTitle = styled.Text`
   margin-top: 25px;
   font-size: 22px;
-  color: ${theme.accentTextColor};
+  color: ${theme.textColor};
 `;
 export const Flatlist = styled.FlatList`
   margin-top: 10px;
@@ -52,13 +63,13 @@ export const Flatlist = styled.FlatList`
 
 export const ForecastItem = styled.View`
   border-radius: 10px;
-  padding: 12px;
+  padding: 10px;
   background-color: #0003;
-  margin-right: 10px;
+  margin-left: 10px;
   margin-bottom: 10px;
 `;
 
-export const ForecastRowContainer = styled.View`
+export const RowContainer = styled.View`
   flex-direction: row;
 `;
 
@@ -67,7 +78,32 @@ export const ForecastIcon = styled.Image`
   width: 60px;
 `;
 
-export const ForecastLargTextLabel = styled.Text`
-  color: ${theme.accentTextColor};
+export const DateText = styled.Text`
+  color: ${theme.textColor};
+  font-size: 32px;
+`;
+
+export const LargeText = styled.Text`
+  color: ${theme.textColor};
+  font-size: 28px;
+`;
+
+export const MediumText = styled.Text`
+  color: ${theme.textColor};
   font-size: 22px;
+`;
+
+export const SmallText = styled.Text`
+  color: ${theme.textColor};
+  font-size: 18px;
+`;
+
+export const MaxTempForecast = styled.Text`
+  font-size: 22px;
+  color: ${theme.textColor};
+`;
+export const MinTempForecast = styled.Text`
+  padding-top: 10px;
+  font-size: 22px;
+  color: ${theme.lightTextColor};
 `;

@@ -3,7 +3,8 @@ const mainColor = '#10acbd';
 export default {
   mainColor: mainColor,
   backgroundColor: mainColor,
-  textColor: '#000',
-  accentTextColor: '#fff',
+  lightTextColor: '#ccca',
+  textColor: '#fff',
+  iconColor: '#fff',
   dividerColor: '#cccc',
 };

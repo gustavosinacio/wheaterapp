@@ -5,6 +5,7 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
+  console.log(999, config);
   config.params = {
     ...config.params,
     appid: '96f3ef93bbb891eba1491c6c26f87d30',
