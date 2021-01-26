@@ -5,11 +5,9 @@ Desenvolvido com android API 29. Não foi testado no iOS
 ---
 ## Exemplos
 
-<div>
-  <img src="./evidence01.jpg" alt="Tela Inicial 01" style="height: 300px;"/>
-  <img src="./evidence02.jpg" alt="Tela Inicial 02" style="height: 300px;"/>
-  <img src="./evidence03.jpg" alt="Tela detalhes previsão" style="height: 300px;"/>
-</div>
+[Tela inicial 01](evidence01.jpg "Tela inicial 01")
+[Tela inicial 02](evidence02.jpg "Tela inicial 02")
+[Tela detalhes previsão](evidence03.jpg "Tela inicial 02")
 
 ## Para rodar a aplicação
 
