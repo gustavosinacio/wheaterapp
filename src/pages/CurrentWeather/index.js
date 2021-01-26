@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import { ScrollView, RefreshControl } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
 import { useEffect } from 'react';
 import { format } from 'date-fns';
 import { pt } from 'date-fns/locale';
@@ -14,6 +15,11 @@ import DayItem from './DayItem';
 import MySafeAreaView from '../../components/MySafeAreaView';
 import ForecastFlatList from '../../components/ForecastFlatList';
 import {
+  LargeText,
+  MediumText,
+  SmallText,
+} from '../../components/GeneralComponents';
+import {
   Container,
   PaddedContainer,
   TitleContainer,
@@ -24,12 +30,10 @@ import {
   TemperatureLabel,
   FlatListTitle,
   DateText,
-  LargeText,
-  MediumText,
-  SmallText,
 } from './styles';
 
 const CurrentWeather = () => {
+  const navigation = useNavigation();
   const [loadingWeather, setLoadingWeather] = useState(true);
   const [locationInfo, setLocationInfo] = useState({});
   const [forecastInfo, setForecastInfo] = useState({ hourly: [] });
@@ -71,11 +75,17 @@ const CurrentWeather = () => {
     }
   }, [locationInfo]);
 
+  const onDayPress = useCallback(
+    (day) => {
+      navigation.navigate('PredictedDay', { day });
+    },
+    [navigation],
+  );
+
   useEffect(() => {
     setLoadingWeather(true);
 
     Geolocation.getCurrentPosition((info) => {
-      console.log(2230, info);
       setLocationTimestamp(new Date(info.timestamp));
       setLocationInfo(info.coords);
     });
@@ -84,10 +94,6 @@ const CurrentWeather = () => {
   useEffect(() => {
     requestWeatherData();
   }, [requestWeatherData]);
-
-  useEffect(() => {
-    console.log(2234, forecastInfo);
-  }, [forecastInfo]);
 
   return (
     <MySafeAreaView>
@@ -189,7 +195,11 @@ const CurrentWeather = () => {
               <ForecastFlatList
                 data={forecastInfo.daily}
                 renderItem={({ item: day, index }) => {
-                  return <DayItem day={day} index={index} />;
+                  return (
+                    <TouchableOpacity onPress={() => onDayPress(day)}>
+                      <DayItem day={day} index={index} />
+                    </TouchableOpacity>
+                  );
                 }}
               />
             </>

@@ -1,8 +1,12 @@
 import React from 'react';
 import { addMinutes, format } from 'date-fns';
 import { pt } from 'date-fns/locale';
-
-import { ForecastItem, RowContainer, MediumText, SmallText } from './styles';
+import {
+  RowContainer,
+  MediumText,
+  SmallText,
+} from '../../components/GeneralComponents';
+import { ForecastItem } from './styles';
 
 const HourItem = ({ minute, index }) => {
   const formatedDate = format(addMinutes(new Date(), index), "HH'h':mm", {

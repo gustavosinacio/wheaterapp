@@ -66,10 +66,6 @@ export const ForecastItem = styled.View`
   margin-bottom: 10px;
 `;
 
-export const RowContainer = styled.View`
-  flex-direction: row;
-`;
-
 export const ForecastIcon = styled.Image`
   height: 60px;
   width: 60px;
@@ -78,24 +74,6 @@ export const ForecastIcon = styled.Image`
 export const DateText = styled.Text`
   color: ${theme.textColor};
   font-size: 32px;
-`;
-
-export const LargeText = styled.Text`
-  color: ${theme.textColor};
-  font-size: 28px;
-  text-align-vertical: bottom;
-`;
-
-export const MediumText = styled.Text`
-  color: ${theme.textColor};
-  font-size: 22px;
-  text-align-vertical: bottom;
-`;
-
-export const SmallText = styled.Text`
-  color: ${theme.textColor};
-  font-size: 18px;
-  text-align-vertical: bottom;
 `;
 
 export const MaxTempForecast = styled.Text`

@@ -3,12 +3,14 @@ import { addDays, format } from 'date-fns';
 import { pt } from 'date-fns/locale';
 
 import {
-  ForecastItem,
   LargeText,
   SmallText,
+  RowContainer,
+} from '../../components/GeneralComponents';
+import {
+  ForecastItem,
   MaxTempForecast,
   MinTempForecast,
-  RowContainer,
   ForecastIcon,
 } from './styles';
 
