@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-// import {  } from 'react-native';
+import { ScrollView, RefreshControl } from 'react-native';
 import { useEffect } from 'react';
 import { addDays, addHours, format } from 'date-fns';
 import { pt } from 'date-fns/locale';
@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import api from '../../services/api';
 import MySafeAreaView from '../../components/MySafeAreaView';
+import theme from '../../assets/theme';
 import {
   Container,
   PaddedContainer,
@@ -29,9 +30,6 @@ import {
   MaxTempForecast,
   MinTempForecast,
 } from './styles';
-import { ScrollView } from 'react-native-gesture-handler';
-import theme from '../../assets/theme';
-import { RefreshControl } from 'react-native';
 
 const CurrentWeather = () => {
   const [loadingWeather, setLoadingWeather] = useState(true);

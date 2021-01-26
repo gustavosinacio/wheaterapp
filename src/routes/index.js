@@ -24,7 +24,7 @@ import CurrentWeather from '../pages/CurrentWeather';
 
 const WeatherInfoStackNavigator = createStackNavigator();
 
-const WeatherStack = () => {
+const Routes = () => {
   return (
     <WeatherInfoStackNavigator.Navigator
       screenOptions={{
@@ -36,10 +36,6 @@ const WeatherStack = () => {
       />
     </WeatherInfoStackNavigator.Navigator>
   );
-};
-
-const Routes = () => {
-  return <WeatherStack />;
 };
 
 export default Routes;
