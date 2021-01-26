@@ -2,6 +2,17 @@
 
 Desenvolvido com android API 29
 
+---
+## Estrutura
+
+Todo o código criado nessa aplicação está contido dentro da past src, seguindo a seguinte estrutura:
+ - **assets**: aqui são mantidos arquivos como imagens ou códigos com variaveis globais da aplicação.
+ - **components**: aqui estão os arquivos componentizados para reduzir acumulação de código em um só arquivo
+ - **pages**: aqui ficam os arquivos que correspondem as telas da aplicação
+ - **routes**: arquivos de rotas podem se tornar extensos, por isso é criada umas pasta apenas para mantê-los. Essa aplicação, por ser pequena, tem apenas o index.js
+ - **services**: aqui são guardados arquivos de serviços, como urls utilizadas em requests, arquivos de autenticação, apis, etc.
+
+ ---
 ## Bibliotecas
 
 * **axios**
@@ -22,3 +33,5 @@ assim, nem sempre ao atualizar a aplicação, serão retornado novos valores
 * **styled-components**
   - Biblioteca que torna a componentização de componentes mais unificada entre
 reactJS e react native
+
+---
