@@ -37,6 +37,7 @@ const CurrentWeather = () => {
     main: {},
     weather: {},
     wind: {},
+    sys: {},
   });
 
   const requestWeatherData = useCallback(async () => {
@@ -132,8 +133,26 @@ const CurrentWeather = () => {
                     {Math.round(weatherInfo.main.temp || 0)}&deg;C
                   </TemperatureLabel>
                 </TempIconContainer>
-                <MediumText>Ventos: {weatherInfo.wind.speed} km/h</MediumText>
-                <MediumText>Umidade: {weatherInfo.main.humidity}%</MediumText>
+                <MediumText>
+                  Sensação térmica: {Math.round(weatherInfo.main.feels_like)}
+                  &deg;C
+                </MediumText>
+                <MediumText>
+                  Max {Math.round(weatherInfo.main.temp_max)}&deg;C, min{' '}
+                  {Math.round(weatherInfo.main.temp_min)}&deg;C
+                </MediumText>
+                <MediumText>Ventos {weatherInfo.wind.speed} km/h</MediumText>
+                <MediumText>Umidade {weatherInfo.main.humidity}%</MediumText>
+                <MediumText>
+                  Sol{' '}
+                  {format(new Date(weatherInfo.sys.sunrise * 1000), 'HH:mm', {
+                    locale: pt,
+                  })}
+                  {' - '}
+                  {format(new Date(weatherInfo.sys.sunset * 1000), 'HH:mm', {
+                    locale: pt,
+                  })}
+                </MediumText>
               </PaddedContainer>
 
               <Divider />
