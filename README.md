@@ -6,9 +6,9 @@ Desenvolvido com android API 29. Não foi testado no iOS
 ## Exemplos
 
 <div>
-<img src="./evidence01.jpg" alt="Tela Inicial 01" style="height: 550px;"/>
-<img src="./evidence02.jpg" alt="Tela Inicial 02" style="height: 550px;"/>
-<img src="./evidence03.jpg" alt="Tela detalhes previsão" style="height: 550px;"/>
+  <img src="./evidence01.jpg" alt="Tela Inicial 01" style="height: 300px;"/>
+  <img src="./evidence02.jpg" alt="Tela Inicial 02" style="height: 300px;"/>
+  <img src="./evidence03.jpg" alt="Tela detalhes previsão" style="height: 300px;"/>
 </div>
 
 ## Para rodar a aplicação
