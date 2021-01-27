@@ -2,7 +2,7 @@ import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import CurrentWeather from '../pages/CurrentWeather';
-import PreditectedDay from '../pages/PreditectedDay';
+import ForecastedDay from '../pages/ForecastedDay';
 
 const WeatherInfoStackNavigator = createStackNavigator();
 
@@ -17,8 +17,8 @@ const Routes = () => {
         component={CurrentWeather}
       />
       <WeatherInfoStackNavigator.Screen
-        name="PredictedDay"
-        component={PreditectedDay}
+        name="ForecastedDay"
+        component={ForecastedDay}
         initialParams={{ day: { weather: [{}], temp: {} } }}
       />
     </WeatherInfoStackNavigator.Navigator>

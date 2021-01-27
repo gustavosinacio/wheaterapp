@@ -83,7 +83,7 @@ const CurrentWeather = () => {
 
   const onDayPress = useCallback(
     (day) => {
-      navigation.navigate('PredictedDay', { day });
+      navigation.navigate('ForecastedDay', { day });
     },
     [navigation],
   );
@@ -101,7 +101,34 @@ const CurrentWeather = () => {
     requestWeatherData();
   }, [requestWeatherData]);
 
-  const timeLabels = useMemo(() => {
+  const forecastTimeLabels = useMemo(() => {
+    let labels = [];
+    forecastInfo.hourly.forEach((hour, index) => {
+      const date = new Date(hour.dt * 1000);
+      const formatedDate = format(date, "HH'h'", {
+        locale: pt,
+      });
+
+      if (index % 5 === 0) {
+        labels.push(formatedDate);
+      }
+    });
+    return labels;
+  }, [forecastInfo.hourly]);
+
+  const forecastTempInfo = useMemo(() => {
+    let temps = [];
+    forecastInfo.hourly.forEach((hour, index) => {
+      const date = new Date(hour.dt * 1000);
+
+      if (index % 5 === 0) {
+        temps.push(hour.temp);
+      }
+    });
+    return temps;
+  }, [forecastInfo.hourly]);
+
+  const precipitationTimeLabels = useMemo(() => {
     let labels = [];
     forecastInfo.minutely.forEach((minute) => {
       const date = new Date(minute.dt * 1000);
@@ -201,12 +228,23 @@ const CurrentWeather = () => {
               <PaddedContainer>
                 <FlatListTitle>Precipitação:</FlatListTitle>
               </PaddedContainer>
-              <LineChart x={timeLabels} y={precipitations} />
+              <LineChart
+                x={precipitationTimeLabels}
+                y={precipitations}
+                yAxisSuffix=" mm/h"
+              />
 
               <Divider />
+
               <PaddedContainer>
                 <FlatListTitle>Previsão (48h):</FlatListTitle>
               </PaddedContainer>
+              <LineChart
+                x={forecastTimeLabels}
+                y={forecastTempInfo}
+                yAxisSuffix="&deg;C"
+              />
+
               <ForecastFlatList
                 data={forecastInfo.hourly}
                 renderItem={({ item: hour, index }) => {

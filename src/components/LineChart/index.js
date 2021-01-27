@@ -8,7 +8,7 @@ import theme from '../../assets/theme';
 
 const screenWidth = Dimensions.get('window').width;
 
-const LineChart = ({ x, y }) => {
+const LineChart = ({ x, y, yAxisSuffix }) => {
   return (
     <ChartView>
       <Chart
@@ -25,10 +25,11 @@ const LineChart = ({ x, y }) => {
         height={220}
         bezier
         fromZero
-        withDots={false}
+        // withDots={false}
         withHorizontalLines={false}
         horizontalLabelRotation={-40}
-        yAxisSuffix=" mm/h"
+        verticalLabelRotation={-40}
+        yAxisSuffix={yAxisSuffix}
         withShadow={false}
         chartConfig={{
           backgroundGradientFromOpacity: 0,

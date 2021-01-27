@@ -19,7 +19,7 @@ import {
   CenteredContainer,
 } from './styles';
 
-const PreditectedDay = ({ route }) => {
+const ForecastedDay = ({ route }) => {
   const {
     params: { day },
   } = route;
@@ -92,4 +92,4 @@ const PreditectedDay = ({ route }) => {
   );
 };
 
-export default PreditectedDay;
+export default ForecastedDay;
