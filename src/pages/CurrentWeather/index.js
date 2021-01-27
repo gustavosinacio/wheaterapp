@@ -119,10 +119,8 @@ const CurrentWeather = () => {
   const forecastTempInfo = useMemo(() => {
     let temps = [];
     forecastInfo.hourly.forEach((hour, index) => {
-      const date = new Date(hour.dt * 1000);
-
       if (index % 5 === 0) {
-        temps.push(hour.temp);
+        temps.push(Math.round(hour.temp));
       }
     });
     return temps;
@@ -243,6 +241,7 @@ const CurrentWeather = () => {
                 x={forecastTimeLabels}
                 y={forecastTempInfo}
                 yAxisSuffix="&deg;C"
+                yDecimalPlaces={0}
               />
 
               <ForecastFlatList

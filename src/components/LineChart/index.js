@@ -8,7 +8,7 @@ import theme from '../../assets/theme';
 
 const screenWidth = Dimensions.get('window').width;
 
-const LineChart = ({ x, y, yAxisSuffix }) => {
+const LineChart = ({ x, y, yAxisSuffix, yDecimalPlaces }) => {
   return (
     <ChartView>
       <Chart
@@ -34,7 +34,7 @@ const LineChart = ({ x, y, yAxisSuffix }) => {
         chartConfig={{
           backgroundGradientFromOpacity: 0,
           backgroundGradientToOpacity: 0,
-          decimalPlaces: 2,
+          decimalPlaces: yDecimalPlaces,
           color: () => `${theme.textColor}`,
           labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
         }}
