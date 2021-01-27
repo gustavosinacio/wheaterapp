@@ -80,6 +80,7 @@ export const MaxTempForecast = styled.Text`
   font-size: 22px;
   color: ${theme.textColor};
 `;
+
 export const MinTempForecast = styled.Text`
   padding-top: 10px;
   font-size: 22px;

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
 import { useEffect } from 'react';
@@ -7,18 +7,20 @@ import { pt } from 'date-fns/locale';
 import Geolocation from '@react-native-community/geolocation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import api from '../../services/api';
-import theme from '../../assets/theme';
-import MinuteItem from './MinuteItem';
 import HourItem from './HourItem';
 import DayItem from './DayItem';
+import LineChart from '../../components/LineChart';
 import MySafeAreaView from '../../components/MySafeAreaView';
 import ForecastFlatList from '../../components/ForecastFlatList';
+import api from '../../services/api';
+import theme from '../../assets/theme';
+
 import {
   LargeText,
   MediumText,
   SmallText,
 } from '../../components/GeneralComponents';
+
 import {
   Container,
   PaddedContainer,
@@ -36,7 +38,11 @@ const CurrentWeather = () => {
   const navigation = useNavigation();
   const [loadingWeather, setLoadingWeather] = useState(true);
   const [locationInfo, setLocationInfo] = useState({});
-  const [forecastInfo, setForecastInfo] = useState({ hourly: [] });
+  const [forecastInfo, setForecastInfo] = useState({
+    hourly: [],
+    minutely: [],
+    daily: [],
+  });
   const [locationTimestamp, setLocationTimestamp] = useState(new Date());
   const [weatherInfo, setWeatherInfo] = useState({
     main: {},
@@ -94,6 +100,31 @@ const CurrentWeather = () => {
   useEffect(() => {
     requestWeatherData();
   }, [requestWeatherData]);
+
+  const timeLabels = useMemo(() => {
+    let labels = [];
+    forecastInfo.minutely.forEach((minute) => {
+      const date = new Date(minute.dt * 1000);
+      const formatedTime = format(date, 'HH:mm');
+
+      if (date.getMinutes() % 10 === 0) {
+        labels.push(formatedTime);
+      }
+    });
+    return labels;
+  }, [forecastInfo.minutely]);
+
+  const precipitations = useMemo(() => {
+    let precipitationValues = [];
+    forecastInfo.minutely.forEach((minute) => {
+      const date = new Date(minute.dt * 1000);
+
+      if (date.getMinutes() % 10 === 0) {
+        precipitationValues.push(minute.precipitation);
+      }
+    });
+    return precipitationValues;
+  }, [forecastInfo.minutely]);
 
   return (
     <MySafeAreaView>
@@ -168,14 +199,9 @@ const CurrentWeather = () => {
 
               <Divider />
               <PaddedContainer>
-                <FlatListTitle>Precipitação (60 min):</FlatListTitle>
+                <FlatListTitle>Precipitação:</FlatListTitle>
               </PaddedContainer>
-              <ForecastFlatList
-                data={forecastInfo.minutely}
-                renderItem={({ item: minute, index }) => {
-                  return <MinuteItem minute={minute} index={index} />;
-                }}
-              />
+              <LineChart x={timeLabels} y={precipitations} />
 
               <Divider />
               <PaddedContainer>
