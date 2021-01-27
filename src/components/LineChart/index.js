@@ -25,7 +25,7 @@ const LineChart = ({ x, y, yAxisSuffix }) => {
         height={220}
         bezier
         fromZero
-        // withDots={false}
+        withDots={false}
         withHorizontalLines={false}
         horizontalLabelRotation={-40}
         verticalLabelRotation={-40}
