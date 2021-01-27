@@ -60,4 +60,7 @@ assim, nem sempre ao atualizar a aplicação, serão retornado novos valores
   - Biblioteca que torna a componentização de componentes mais unificada entre
 reactJS e react native
 
+
+* **react-native-chart-kit**
+  - Gráficos em react native
 ---
